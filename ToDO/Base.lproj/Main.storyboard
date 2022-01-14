@@ -47,7 +47,7 @@
         <!--New ToDo-->
         <scene sceneID="4kk-Py-yAU">
             <objects>
-                <tableViewController id="fV2-sa-I2m" sceneMemberID="viewController">
+                <tableViewController id="fV2-sa-I2m" customClass="ToDoDetailTableViewController" customModule="ToDO" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="gug-zc-pFF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,11 +72,18 @@
                                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
                                                             </state>
                                                             <state key="selected" image="checkmark.circle" catalog="system"/>
+                                                            <connections>
+                                                                <action selector="isCompleteButtonTapped:" destination="fV2-sa-I2m" eventType="touchUpInside" id="Roe-Bn-TBh"/>
+                                                            </connections>
                                                         </button>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Remind mr to..." borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0vq-er-oIT">
                                                             <rect key="frame" x="32" y="0.0" width="342" height="34.5"/>
                                                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
+                                                            <connections>
+                                                                <action selector="returnPressed:" destination="fV2-sa-I2m" eventType="editingDidEnd" id="zCl-qr-K67"/>
+                                                                <action selector="textEditingChanged:" destination="fV2-sa-I2m" eventType="editingDidEnd" id="SxI-0a-eD4"/>
+                                                            </connections>
                                                         </textField>
                                                     </subviews>
                                                 </stackView>
@@ -126,6 +133,9 @@
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="xVp-oM-xcA">
                                                     <rect key="frame" x="20" y="11" width="374" height="216.5"/>
+                                                    <connections>
+                                                        <action selector="datePickerChanged:" destination="fV2-sa-I2m" eventType="valueChanged" id="mUs-Zy-Y46"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                             <constraints>
@@ -184,6 +194,14 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="dueDateLabel" destination="Kn4-IX-OYK" id="MWZ-Uh-E7w"/>
+                        <outlet property="dueDatePickerView" destination="xVp-oM-xcA" id="DPu-bp-W03"/>
+                        <outlet property="isCompleteButton" destination="RPE-92-DeI" id="HDf-jx-sLf"/>
+                        <outlet property="notesTextView" destination="H5g-FS-Vh8" id="uUL-mz-tio"/>
+                        <outlet property="saveButton" destination="8PR-i8-Ise" id="Aqh-Xk-gUc"/>
+                        <outlet property="titleTextField" destination="0vq-er-oIT" id="hCB-5O-dPV"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8PR-wn-LiG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="DKb-OB-B0f" userLabel="Exit" sceneMemberID="exit"/>
