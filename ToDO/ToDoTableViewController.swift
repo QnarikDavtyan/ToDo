@@ -22,8 +22,7 @@ class ToDoTableViewController: UITableViewController {
     }
 
 
-    override func tableView(
-        _ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todos.count
     }
 
@@ -35,8 +34,8 @@ class ToDoTableViewController: UITableViewController {
         cell.textLabel?.text = todo.title
         return cell
     }
-    override func tableView(
-        _ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
@@ -75,5 +74,4 @@ class ToDoTableViewController: UITableViewController {
             tableView.insertRows(at:[newIndexPath], with: .automatic)
         }
     }
-}
-}
+    }}
