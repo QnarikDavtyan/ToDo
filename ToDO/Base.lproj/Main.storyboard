@@ -39,10 +39,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="dIC-z2-bsC" kind="presentation" destinationCreationSelector="editToDo:" id="cbw-KC-Rfb"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a5y-g2-cUL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1686.9565217391305" y="77.678571428571431"/>
+            <point key="canvasLocation" x="1720" y="78"/>
         </scene>
         <!--New ToDo-->
         <scene sceneID="4kk-Py-yAU">
@@ -249,6 +252,9 @@
             <point key="canvasLocation" x="776.81159420289862" y="77.678571428571431"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="cbw-KC-Rfb"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="circle" catalog="system" width="128" height="121"/>
