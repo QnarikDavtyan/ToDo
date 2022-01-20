@@ -7,10 +7,10 @@
 
 import UIKit
 
-class ToDoTableViewController: UITableViewController {
-
+class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
+    
     var todos = [ToDo]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let savedToDos = ToDo.loadToDos() {
@@ -29,10 +29,13 @@ class ToDoTableViewController: UITableViewController {
 
    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier", for: indexPath) as? ToDoCell
+        else { fatalError() }
 
         let todo = todos[indexPath.row]
-        cell.textLabel?.text = todo.title
+        cell.titleLabel?.text = todo.title
+        cell.isCompleteButton.isSelected = todo.isComplete
+        cell.delegate = self
         return cell
     }
     override func tableView(
@@ -46,6 +49,7 @@ class ToDoTableViewController: UITableViewController {
         if editingStyle == .delete {
             todos.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            ToDo.saveToDos(todos)
         }
     }
     
@@ -75,5 +79,16 @@ class ToDoTableViewController: UITableViewController {
             tableView.insertRows(at:[newIndexPath], with: .automatic)
         }
     }
+        ToDo.saveToDos(todos)
 }
-}
+    
+    func checkmarkTapped(sender: ToDoCell) {
+        if let indexPath = tableView.indexPath(for: sender) {
+            var todo = todos[indexPath.row]
+            todo.isComplete.toggle()
+            todos[indexPath.row] = todo
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            ToDo.saveToDos(todos)
+        }
+    }
+    }

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct ToDo: Equatable {
+struct ToDo: Equatable, Codable {
     let id = UUID()
     var title: String
     var isComplete: Bool
@@ -19,9 +19,26 @@ struct ToDo: Equatable {
         return lhs.id == rhs.id
     }
     
+    static let documentsDirectory =
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    
+    static let archiveURL =
+        documentsDirectory.appendingPathComponent("todos").appendingPathExtension("plist")
+    
     static func loadToDos() -> [ToDo]? {
-        return nil
+        guard let codedToDo = try? Data(contentsOf: archiveURL)
+        else { return nil }
+        
+        let propertyListDecoder = PropertyListDecoder()
+        return try? propertyListDecoder.decode([ToDo].self, from: codedToDo)
     }
+    
+    static func saveToDos(_ todos: [ToDo]) {
+        let propertyListEncoder = PropertyListEncoder()
+        let codedToDos = try? propertyListEncoder.encode(todos)
+        try? codedToDos?.write(to: archiveURL, options: .noFileProtection)
+    }
+    
     static func loadSampleToDos() -> [ToDo] {
         let todo1 = ToDo(title: "ToDo One", isComplete: false, dueDate: Date(), notes: "Notes 1")
         let todo2 = ToDo(title: "ToDo Two", isComplete: false, dueDate: Date(), notes: "Notes 2")
