@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MDX-vu-6Ph">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MDX-vu-6Ph">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -56,6 +56,7 @@
                                 <connections>
                                     <outlet property="isCompleteButton" destination="ACp-PQ-VCO" id="As4-2e-DdD"/>
                                     <outlet property="titleLabel" destination="tng-SI-azr" id="78D-Ag-C7q"/>
+                                    <segue destination="dIC-z2-bsC" kind="presentation" id="MTY-xI-Vwh"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -68,18 +69,15 @@
                     <navigationItem key="navigationItem" title="My To-Do's" id="D5h-li-UXu">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="9qw-vK-a1C">
                             <connections>
-                                <segue destination="dIC-z2-bsC" kind="presentation" destinationCreationSelector="editToDo:sender:" id="Hsb-QN-Wb5"/>
+                                <segue destination="dIC-z2-bsC" kind="presentation" id="f4k-Kh-W4H"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <segue destination="dIC-z2-bsC" kind="presentation" destinationCreationSelector="editToDo:" id="cbw-KC-Rfb"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a5y-g2-cUL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1720" y="78"/>
+            <point key="canvasLocation" x="1594" y="78"/>
         </scene>
         <!--New ToDo-->
         <scene sceneID="4kk-Py-yAU">
@@ -220,11 +218,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New ToDo" largeTitleDisplayMode="never" id="hTx-j2-0o9">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ygy-Pa-Lyj">
-                            <connections>
-                                <segue destination="DKb-OB-B0f" kind="unwind" unwindAction="unwindToToDoListWithSegue:" id="ox6-RN-Akh"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ygy-Pa-Lyj"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="8PR-i8-Ise">
                             <connections>
                                 <segue destination="DKb-OB-B0f" kind="unwind" identifier="saveUnwind" unwindAction="unwindToToDoListWithSegue:" id="Amy-Z2-gfd"/>
@@ -249,7 +243,7 @@
                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
                 </button>
             </objects>
-            <point key="canvasLocation" x="3290" y="78"/>
+            <point key="canvasLocation" x="3239" y="78"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yxV-8P-2RG">
@@ -260,7 +254,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="fV2-sa-I2m" kind="relationship" relationship="rootViewController" id="iCO-Jg-W0m"/>
+                        <segue destination="fV2-sa-I2m" kind="relationship" relationship="rootViewController" destinationCreationSelector="openEditSegue:sender:" id="iCO-Jg-W0m"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wE3-HF-hYc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -287,7 +281,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Hsb-QN-Wb5"/>
+        <segue reference="MTY-xI-Vwh"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>

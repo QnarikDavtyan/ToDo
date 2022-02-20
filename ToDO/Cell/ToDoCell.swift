@@ -13,7 +13,11 @@ protocol ToDoCellDelegate: AnyObject {
 
 class ToDoCell: UITableViewCell {
     
+    // MARK: - Delegation
+    
     weak var delegate: ToDoCellDelegate?
+    
+    // MARK: - Outlet
 
     @IBOutlet var isCompleteButton: UIButton!
     @IBOutlet var titleLabel: UILabel!
@@ -28,5 +32,12 @@ class ToDoCell: UITableViewCell {
     
     @IBAction func completeButtonTapped(_ sender: UIButton) {
         delegate?.checkmarkTapped(sender: self)
+    }
+    
+    // MARK: - Injection
+    
+    func populate(with todo: ToDo) {
+        titleLabel.text = todo.title
+        isCompleteButton.isSelected = todo.isComplete
     }
 }

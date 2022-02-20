@@ -7,19 +7,34 @@
 
 import UIKit
 
-class ToDoDetailTableViewController: UITableViewController {
+final class ToDoDetailTableViewController: UITableViewController {
     
-    var todo: ToDo?
-    var isDatePickerHidden = true
-    let dateLabelIndexPath = IndexPath(row: 0, section: 1)
-    let datePikerIndexPath = IndexPath(row: 1, section: 1)
-    let notesIndexPath = IndexPath(row: 0, section: 2)
+    // MARK: Init
+    
+    init?(coder: NSCoder, todo: ToDo) {
+        self.todo = todo
+        super.init(coder: coder)
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
+    // MARK: - Outlet
 
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var isCompleteButton: UIButton!
     @IBOutlet var dueDateLabel: UILabel!
     @IBOutlet var dueDatePickerView: UIDatePicker!
     @IBOutlet var notesTextView: UITextView!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    
+    // MARK: - Model
+    
+    var todo: ToDo?
+   
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +52,13 @@ class ToDoDetailTableViewController: UITableViewController {
         updateSaveButtonState()
     }
     
+    // MARK: DataSource
+    
+    var isDatePickerHidden = true
+    let dateLabelIndexPath = IndexPath(row: 0, section: 1)
+    let datePikerIndexPath = IndexPath(row: 1, section: 1)
+    let notesIndexPath = IndexPath(row: 0, section: 2)
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath {
         case datePikerIndexPath where isDatePickerHidden == true:
@@ -48,6 +70,8 @@ class ToDoDetailTableViewController: UITableViewController {
         }
     }
     
+    // MARK: Delegate
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath == dateLabelIndexPath {
             isDatePickerHidden.toggle()
@@ -58,15 +82,11 @@ class ToDoDetailTableViewController: UITableViewController {
         }
     }
 
-    @IBOutlet weak var saveButton: UIBarButtonItem!
+    // MARK: Callbacks
     
     func updateSaveButtonState() {
         let shouldEnableSaveButton = titleTextField.text?.isEmpty == false
         saveButton.isEnabled = shouldEnableSaveButton
-    }
-    
-    @IBAction func textEditingChanged(_ sender: Any) {
-        updateSaveButtonState()
     }
     
     @IBAction func returnPressed(_ sender: UITextField) {
@@ -76,16 +96,23 @@ class ToDoDetailTableViewController: UITableViewController {
     @IBAction func isCompleteButtonTapped(_ sender: UIButton) {
         isCompleteButton.isSelected.toggle()
     }
-        
+    
+    // MARK: Guts
+    
+    @IBAction func textEditingChanged(_ sender: Any) {
+        updateSaveButtonState()
+    }
+    
     func updateDueDateLabel(date: Date) {
-        dueDateLabel.text = ToDo.dueDateFormatter.string(from: date)
+        dueDateLabel.text = DateFormatter.dueDateFormatter.string(from: date)
     }
     
     @IBAction func datePickerChanged(_ sender: UIDatePicker) {
         updateDueDateLabel(date: sender.date)
     }
-    
 
+    // MARK: Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
             
@@ -98,5 +125,4 @@ class ToDoDetailTableViewController: UITableViewController {
         
       todo = ToDo(title: title, isComplete: isComplete, dueDate: dueDate, notes: notes)
     }
-     
 }
