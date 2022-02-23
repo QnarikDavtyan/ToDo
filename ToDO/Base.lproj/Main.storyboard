@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MDX-vu-6Ph">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MDX-vu-6Ph">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--My To-Do's-->
         <scene sceneID="ar3-Xo-1Re">
             <objects>
                 <tableViewController id="uBl-mx-SQf" customClass="ToDoTableViewController" customModule="ToDO" customModuleProvider="target" sceneMemberID="viewController">
@@ -16,13 +16,48 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoCellIdentifier" id="8k8-Sz-BZk">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoCellIdentifier" id="8k8-Sz-BZk" customClass="ToDoCell" customModule="ToDO" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="49.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8k8-Sz-BZk" id="nkM-I3-mDe">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="49.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5cF-xv-QLc">
+                                            <rect key="frame" x="20" y="11" width="374" height="27.5"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ACp-PQ-VCO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="28" height="27.5"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" image="circle" catalog="system">
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
+                                                    </state>
+                                                    <state key="selected" image="checkmark.circle.fill" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="completeButtonTapped:" destination="8k8-Sz-BZk" eventType="touchUpInside" id="bhG-Lj-M8P"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tng-SI-azr">
+                                                    <rect key="frame" x="36" y="0.0" width="338" height="27.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="5cF-xv-QLc" secondAttribute="bottom" id="Pek-02-Pk1"/>
+                                        <constraint firstItem="5cF-xv-QLc" firstAttribute="top" secondItem="nkM-I3-mDe" secondAttribute="topMargin" id="j0y-1H-2e9"/>
+                                        <constraint firstItem="5cF-xv-QLc" firstAttribute="leading" secondItem="nkM-I3-mDe" secondAttribute="leadingMargin" id="tHn-z2-ObV"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="5cF-xv-QLc" secondAttribute="trailing" id="wei-rW-2p7"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="isCompleteButton" destination="ACp-PQ-VCO" id="As4-2e-DdD"/>
+                                    <outlet property="titleLabel" destination="tng-SI-azr" id="78D-Ag-C7q"/>
+                                    <segue destination="dIC-z2-bsC" kind="presentation" id="MTY-xI-Vwh"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -31,10 +66,10 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="D5h-li-UXu">
+                    <navigationItem key="navigationItem" title="My To-Do's" id="D5h-li-UXu">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="9qw-vK-a1C">
                             <connections>
-                                <segue destination="dIC-z2-bsC" kind="presentation" id="Hsb-QN-Wb5"/>
+                                <segue destination="dIC-z2-bsC" kind="presentation" id="f4k-Kh-W4H"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -42,7 +77,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a5y-g2-cUL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1686.9565217391305" y="77.678571428571431"/>
+            <point key="canvasLocation" x="1594" y="78"/>
         </scene>
         <!--New ToDo-->
         <scene sceneID="4kk-Py-yAU">
@@ -65,7 +100,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="kCC-Dt-qQC">
                                                     <rect key="frame" x="20" y="11" width="374" height="34.5"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RPE-92-DeI">
+                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RPE-92-DeI">
                                                             <rect key="frame" x="0.0" y="0.0" width="28" height="34.5"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <state key="normal" image="circle" catalog="system">
@@ -76,7 +111,7 @@
                                                                 <action selector="isCompleteButtonTapped:" destination="fV2-sa-I2m" eventType="touchUpInside" id="Roe-Bn-TBh"/>
                                                             </connections>
                                                         </button>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Remind mr to..." borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0vq-er-oIT">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Remind mr to..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0vq-er-oIT">
                                                             <rect key="frame" x="32" y="0.0" width="342" height="34.5"/>
                                                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
@@ -183,11 +218,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New ToDo" largeTitleDisplayMode="never" id="hTx-j2-0o9">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ygy-Pa-Lyj">
-                            <connections>
-                                <segue destination="DKb-OB-B0f" kind="unwind" unwindAction="unwindToToDoListWithSegue:" id="ox6-RN-Akh"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ygy-Pa-Lyj"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="8PR-i8-Ise">
                             <connections>
                                 <segue destination="DKb-OB-B0f" kind="unwind" identifier="saveUnwind" unwindAction="unwindToToDoListWithSegue:" id="Amy-Z2-gfd"/>
@@ -212,7 +243,7 @@
                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
                 </button>
             </objects>
-            <point key="canvasLocation" x="3290" y="78"/>
+            <point key="canvasLocation" x="3239" y="78"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yxV-8P-2RG">
@@ -223,7 +254,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="fV2-sa-I2m" kind="relationship" relationship="rootViewController" id="iCO-Jg-W0m"/>
+                        <segue destination="fV2-sa-I2m" kind="relationship" relationship="rootViewController" destinationCreationSelector="openEditSegue:sender:" id="iCO-Jg-W0m"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wE3-HF-hYc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -249,8 +280,12 @@
             <point key="canvasLocation" x="776.81159420289862" y="77.678571428571431"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="MTY-xI-Vwh"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
+        <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
         <image name="circle" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
